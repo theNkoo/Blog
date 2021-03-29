@@ -1,0 +1,47 @@
+<nav class="navbar navbar-expand-md navbar-dark bg-danger  mb-4">
+      <a class="navbar-brand" href="{% url 'index'  %}">AnaSayafa</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarCollapse" aria-controls="navbarCollapse" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarCollapse">
+        <ul class="navbar-nav mr-auto">
+         
+         <li class="nav-item active">
+              <a class="nav-link" href="{% url 'article:articles'  %}">Yazılar<span class="sr-only">(current)</span></a>
+            </li>
+         
+          <li class="nav-item active">
+              <a class="nav-link" href="{% url 'article:photos'  %}">Galeri<span class="sr-only">(current)</span></a>
+            </li>
+
+
+         </ul> 
+          
+      <ul class="navbar-nav ml-auto">
+          {% if request.user.is_authenticated%}
+
+          <li class="nav-item active">
+              <a class="nav-link" href="{% url 'article:dashboard'  %}">Kontrol Paneli<span class="sr-only">(current)</span></a>
+            </li>
+          
+          <li class="nav-item active">
+              <a class="nav-link" href="{% url 'article:photo'  %}">Fotograf<span class="sr-only">(current)</span></a>
+            </li>
+
+          <li class="nav-item active">
+              <a class="nav-link" href="{% url 'user:logoutUser'  %}">Çıkış<span class="sr-only">(current)</span></a>
+            </li>
+          {% else %}
+
+            <li class="nav-item active">
+                <a class="nav-link" href="{% url 'user:loginUser'  %}">Giriş<span class="sr-only">(current)</span></a>
+              </li>
+
+            <li class="nav-item active">
+              <a class="nav-link" href="{% url 'user:register'  %}">Kayıt Ol<span class="sr-only">(current)</span></a>
+            </li>
+          {% endif %}
+        </ul>
+      </div>
+    
+    </nav>

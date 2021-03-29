@@ -1,0 +1,81 @@
+{% extends "layout.html" %}
+
+{% block title %}
+<title>Galeri</title>
+{% endblock title %}
+
+
+{% block body %}
+<div class = 'row'>
+<div class="col-md-8 offset-md-3">
+<h2>Galeri</h2>
+<hr>
+
+<!--
+<div class = 'row'>
+    <div class="col-md-8 offset-md-0">
+      <form>
+          {% csrf_token %}
+         <input type="text" class="input-sm" name = 'keyword' maxlength="64" placeholder="Arama butonu">
+         <button type="submit" class="btn btn-danger">Ara</button>
+       </form>
+    </div>
+</div>
+-->
+
+{% if articles %}
+{% for article in articles  %}
+<div class="row">
+      
+      <!-- Post Content Column -->
+      <div class="col-lg-8">
+
+        <!-- Title -->
+        <a href='{% url "article:detailF" article.id%}'><h1 class="mt-4">{{article.title}}</h1></a>
+
+        <!-- Author -->
+        <p class="lead">
+          Fotograf Sahibi
+            {{article.owner.username}}
+        </p>
+
+        <hr>
+
+        <!-- Date/Time -->
+        <p>Tarih Bilgisi</p>
+            {{article.created_date}}
+        <hr>
+
+        <!--Preview Image -->
+        {% if article.article_image %}
+        <img class="img-fluid rounded" src="{{article.article_image.url}}" alt="">
+         {% endif %}
+        
+        
+        <hr> 
+
+        <!-- Post Content -->
+      
+        <p class="lead">
+         {{article.content|safe|truncatewords:60}}
+        
+        
+        </p>
+
+        <hr>
+
+          
+        
+      </div>
+    </div>
+
+{% endfor %}
+{% else %}
+<div class = 'alert alert-warning'>
+  Makale bulunamadı
+</div>
+{% endif %}
+</div>
+  </div>
+
+{% endblock body %}
